@@ -57,13 +57,13 @@ public class Controller {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(map);
     }
-
+    
     @GetMapping("/api")
     public ResponseEntity<HashMap<String, Object>> api() {
         HashMap<String, Object> map = new HashMap<>();
         map.put("start_date", friendlyTime);
         map.put("out_of_memory", oom);
-        if (oom) {
+        if (!oom) {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(map);
         }else{
