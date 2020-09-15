@@ -27,6 +27,6 @@ SpringBoot API OOM demo with Actuator Prometheus metrics enabled.
     # Destroy container
     ./run.sh destroy
 
-#### Run Public Container
+### Run Public Container
 
     docker run -d --name oom-demo --net=host --restart always yeticloud/oom-demo:latest
