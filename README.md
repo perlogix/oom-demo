@@ -16,7 +16,7 @@ SpringBoot API OOM demo with Actuator Prometheus metrics enabled.
     # Get Prometheus Exporter metrics
     curl http://localhost:8888/actuator/prometheus
     
-### Build / Run
+### Build Container
     
     # Build container
     ./run.sh build
@@ -26,3 +26,7 @@ SpringBoot API OOM demo with Actuator Prometheus metrics enabled.
     
     # Destroy container
     ./run.sh destroy
+
+#### Run Public Container
+
+    docker run -d --name oom-demo --net=host --restart always yeticloud/oom-demo:latest
