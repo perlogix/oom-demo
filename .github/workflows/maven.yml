@@ -23,6 +23,6 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
       
-#     - name: Install And Run Security Scan
-#       run: apt-get update && apt-get install -y unzip && cd / && curl -OL https://dl.bintray.com/jeremy-long/owasp/dependency-check-5.3.2-release.zip && cd / && unzip dependency-check*.zip && /dependency-check/bin/dependency-check.sh --scan oom-demo-master -f JSON --prettyPrint | tee dependency-check-report.json
+    - name: Install And Run Security Scan
+      run: apt-get update && apt-get install -y unzip && cd / && curl -OL https://dl.bintray.com/jeremy-long/owasp/dependency-check-5.3.2-release.zip && cd / && unzip dependency-check*.zip && /dependency-check/bin/dependency-check.sh --scan /oom-demo-master -f JSON --prettyPrint | tee dependency-check-report.json
       
