@@ -1,0 +1,58 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Set up JDK 1.15
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.15
+        
+      
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
+            
+#     - name: Install And Run Security Scan
+#       run: sudo apt-get update && sudo apt-get install -y sudo unzip && cd / && sudo curl -OL https://dl.bintray.com/jeremy-long/owasp/dependency-check-6.0.3-release.zip && cd / && sudo unzip dependency-check*.zip && sudo /dependency-check/bin/dependency-check.sh --scan /home/runner/work/oom-demo/oom-demo -f JSON --prettyPrint | sudo tee dependency-check-report.json
+ 
+    - name: Add code to distroless container and start tini
+      run: |
+          docker build -t oom-demo:${{ github.sha }} -f Dockerfile-Distroless .
+          
+          
+    - name: Minify docker image with docker-slim
+      run: |
+       curl -LO https://downloads.dockerslim.com/releases/1.32.0/dist_linux.tar.gz
+       tar -xzf dist_linux.tar.gz
+       chmod +x dist_linux 
+       ./dist_linux/docker-slim build --http-probe=false --target oom-demo:${{ github.sha }}
+       
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+          image-ref: 'oom-demo:${{ github.sha }}'
+          format: 'template'
+          template: '@/contrib/sarif.tpl'
+          output: 'trivy-results.sarif'
+
+    - name: Upload Trivy Scan Resulte to GitHub SecTab
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: 'trivy-results.sarif'
+   
+      
+      
