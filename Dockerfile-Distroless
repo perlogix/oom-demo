@@ -14,7 +14,7 @@ ENV DB_USER postgres
 ENV DB_PASSWORD postgres
 
 
-WORKDIR /app/target
+
 EXPOSE 8888 8888
 
-ENTRYPOINT ["/tini", "--", "java", "-jar", "/app/target/oom-demo-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["/tini", "--", "java", "-jar", "/app/oom-demo-0.0.1-SNAPSHOT.jar"]
