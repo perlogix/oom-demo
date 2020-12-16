@@ -1,5 +1,5 @@
 FROM gcr.io/distroless/java:11-debug
 
-COPY /home/runner/work/oom-demo/oom-demo/target/oom-demo-0.0.1-SNAPSHOT.jar /app
+COPY ./target/oom-demo-0.0.1-SNAPSHOT.jar /app
 
 ENTRYPOINT ["java", "-jar", "/app/oom-demo-0.0.1-SNAPSHOT.jar"]
