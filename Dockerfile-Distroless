@@ -6,7 +6,7 @@ RUN chmod +x /tini
 FROM gcr.io/distroless/java:11
 COPY --from=tini /tini* /
 COPY ./target/oom-demo-0.0.1-SNAPSHOT.jar /app
-COPY /usr/bin/tini* /
+
 
 ENV SERVER_PORT 8888
 ENV DB_ADDRESS jdbc:postgresql://pre-dev-backend-db.cfu2xhpbzyk4.us-east-1.rds.amazonaws.com:5432/postgres
@@ -17,4 +17,4 @@ ENV DB_PASSWORD postgres
 WORKDIR /app/target
 EXPOSE 8888 8888
 
-ENTRYPOINT ["/tini", "--", "java", "-jar", "/app/oom-demo-master/target/oom-demo-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["/tini", "--", "java", "-jar", "/app/target/oom-demo-0.0.1-SNAPSHOT.jar"]
