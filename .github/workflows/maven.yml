@@ -27,7 +27,7 @@ jobs:
       run: mvn -B package --file pom.xml
       
     - name: LS
-      run: ls -la ./
+      run: pwd
     
     
       
