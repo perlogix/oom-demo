@@ -24,5 +24,5 @@ jobs:
       run: mvn -B package --file pom.xml
       
     - name: Install And Run Security Scan
-      run: sudo apt-get update && sudo apt-get install -y sudo unzip && cd / && sudo curl -OL https://dl.bintray.com/jeremy-long/owasp/dependency-check-5.3.2-release.zip && cd / && unzip dependency-check*.zip && sudo /dependency-check/bin/dependency-check.sh --scan /oom-demo-master -f JSON --prettyPrint | tee dependency-check-report.json
+      run: sudo apt-get update && sudo apt-get install -y sudo unzip && cd / && sudo curl -OL https://dl.bintray.com/jeremy-long/owasp/dependency-check-5.3.2-release.zip && cd / && sudo unzip dependency-check*.zip && sudo /dependency-check/bin/dependency-check.sh --scan /oom-demo-master -f JSON --prettyPrint | tee dependency-check-report.json
       
