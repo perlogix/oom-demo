@@ -36,7 +36,7 @@ jobs:
     
     - name: Add code to distroless container and start tini
       run: |
-          docker build -t oom-demo:${{ github.sha }} -f Dockerfile-distroless .
+          docker build -t oom-demo:${{ github.sha }} -f Dockerfile-Distroless .
    
       
       
