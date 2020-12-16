@@ -29,7 +29,7 @@ jobs:
 #     - name: Install And Run Security Scan
 #       run: sudo apt-get update && sudo apt-get install -y sudo unzip && cd / && sudo curl -OL https://dl.bintray.com/jeremy-long/owasp/dependency-check-6.0.3-release.zip && cd / && sudo unzip dependency-check*.zip && sudo /dependency-check/bin/dependency-check.sh --scan /home/runner/work/oom-demo/oom-demo -f JSON --prettyPrint | sudo tee dependency-check-report.json
     - name: Install Tini for app container 
-      run: apt-get install tini
+      run: sudo apt-get install tini
     - name: Add code to distroless container and start tini
       run: |
           docker build -t oom-demo:${{ github.sha }} -f Dockerfile-Distroless .
