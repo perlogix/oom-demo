@@ -28,11 +28,11 @@ main() {
 
   case $1 in
     build)
-      sudo docker build -t "$REPO_NAME":"$VER" .
+      sudo docker build --network=host -t "$REPO_NAME":"$VER" .
       ;;
 
     run)
-      sudo docker run --net=host -d --name="$REPO_NAME" --restart always "$REPO_NAME":"$VER"
+      sudo docker run --network=host -d --name="$REPO_NAME" --restart always "$REPO_NAME":"$VER"
       ;;
 
     destroy)

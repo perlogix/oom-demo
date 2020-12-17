@@ -16,23 +16,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      
-    - name: Set up JDK 1.15
-      uses: actions/setup-java@v1
-      with:
-        java-version: 1.15
-        
-      
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
-            
-#     - name: Install And Run Security Scan
-#       run: sudo apt-get update && sudo apt-get install -y sudo unzip && cd / && sudo curl -OL https://dl.bintray.com/jeremy-long/owasp/dependency-check-6.0.3-release.zip && cd / && sudo unzip dependency-check*.zip && sudo /dependency-check/bin/dependency-check.sh --scan /home/runner/work/oom-demo/oom-demo -f JSON --prettyPrint | sudo tee dependency-check-report.json
  
-    - name: Add code to distroless container and start tini
+    - name: Build mvn project and container
       run: |
-          docker build -t oom-demo:${{ github.sha }} -f Dockerfile-Distroless .
-          
+          docker build -t oom-demo:${{ github.sha }} .
           
     - name: Minify docker image with docker-slim
       run: |
